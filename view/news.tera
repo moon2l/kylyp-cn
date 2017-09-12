@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rust-Forum</title>
+    <meta name="description" content="CSS only mobile first navigation">
+    <meta name="author" content="Ian Yates">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+ 
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+</head>
+<body >
+    <div id="all">
+        <header >
+                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <label ><a id="menu" href="#" >Menu</a></label>
+        </header>
+        <nav id="mnav" >
+                <ul>
+                    <li >
+                        <a href="/doc">文档</a>
+                    </li>
+                    <li >
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
+                    </li>
+                    <li >
+                        <a href="/bolg/new">新博客</a>
+                    </li>
+                    <li >
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
+                    </li>
+                </ul>
+        </nav>
+        <main id="main">
+            <div id="content" >
+                <div class="re-desk-75 re-table-100 ">
+                    <div id="theme">
+                        <div id="title">
+                            <h3> 新闻 </h3>
+                            <span id="info">Rusters</span>&emsp;
+                            <span id="info">2017-9-11</span>
+                        </div>
+                        <div id="content">
+                            <ul>
+                                <h3 id="rust" style="color:aqua;"><a href="https://www.rust-lang.org/zh-CN/documentation.html">Rust官方文档</a></h3>
+                            </ul>
+                            <h2 style="background-color:aqua;"><strong>新闻</strong></h2>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="re-desk-25 re-table-100">
+                    <div id="aside">
+                        <h3>What</h3>
+                        <p>Chania is a city on the island of Crete.</p>
+                        <h3>Where</h3>
+                        <p>Crete is a Greek island in the Mediterranean Sea.</p>
+                        <h3>How</h3>
+                        <p>You can reach Chania airport from all over Europe.</p>
+                    </div>
+                </div>
+                <footer class="re-desk-25 re-table-100" >
+                    <div id="aside">
+                        <div >
+                            <ul >
+                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
+        </span>
+        {% if username %}
+        <span id="primary_nav">
+                <ul id="dmenu">
+                    <span id="dright">
+                        <li class="menu-item"><a href="/article/new">新发布</a></li>
+                    </span>
+                </ul>
+        </span>
+        <span id="nav_right">
+                <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/logou">退出</a></li>
+        </span>
+        {% else %}
+        <span id="nav_right">
+                <li ><a href="/user/register">注册 &emsp;</a></li>
+                <li ><a href="/user/login">登录</a></li>
+        </span>
+        {% endif %}
+    </div>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rust-Forum</title>
+    <meta name="description" content="CSS only mobile first navigation">
+    <meta name="author" content="Ian Yates">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+ 
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+</head>
+<body >
+    <div id="all">
+        <header >
+                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <label ><a id="menu" href="#" >Menu</a></label>
+        </header>
+        <nav id="mnav" >
+                <ul>
+                    <li >
+                        <a href="/doc">文档</a>
+                    </li>
+                    <li >
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
+                    </li>
+                    <li >
+                        <a href="/bolg/new">新博客</a>
+                    </li>
+                    <li >
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
+                    </li>
+                </ul>
+        </nav>
+        <main id="main">
+            <div id="content" >
+                <div class="re-desk-75 re-table-100 ">
+                    <div id="theme">
+                        <div id="title">
+                            <h3> {{ article.title }} </h3> 
+                            <span id="info">{{ article.category }}</span> • 
+                            <span id="info">{{ article.username }}</span> • 
+                            <span id="info">{{ article.created_at }}</span>
+                        </div>
+                        <div id="content">{{ article.content }}</div>
+                    </div>
+                    <div id="comment">
+                        <div id="title">评论 &nbsp;{{ article.comments_count }}</div>
+                        {% for comment in comments %}
+                            <div id="comment-content">
+                                <div>
+                                    <span id="info">{{loop.index}}.</span>
+                                    <span id="info">{{ comment.username }}</span> • <span id="info">{{ comment.created_at }}</span>
+                                </div>
+                                <div style="font-size:14px;">  {{ comment.content }} </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div id="reply">
+                        {% if username %}
+                            <textarea class="ans_con" ></textarea><br>
+                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> 评论 </span></button>
+                            <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+                            <script type="text/javascript" >
+                            var running = false;
+                            $('#submit').on('click', function(){
+                                if(running) return;
+                                running = true;
+                                $('.tip').text('');
+
+                                var ans_con = $('.ans_con').val();
+                                if(!ans_con){
+                                $('.tip').text('*输入不能为空');
+                                return;
+                                }
+                                $('.tip').text('数据正在提交中...');
+                                
+                                var aid = $(this).data('aid');
+
+                                $.ajax({
+                                async: false,
+                                url : '/article/addcomment',
+                                data : {aid:aid, content:ans_con},
+                                dataType : 'json',
+                                type : 'get'
+                                }).done(function(){
+                                
+                                running = false;
+                                })
+                                window.location.reload ( true );  
+                            })
+                            </script>
+                        {% else %}
+                            <span style="background-color:aqua">请登录后评论.<a href="/user/login">登录</a></span>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+                <div class="re-desk-25 re-table-100">
+                    <div id="aside">
+                        <h3>What</h3>
+                        <p>Chania is a city on the island of Crete.</p>
+                        <h3>Where</h3>
+                        <p>Crete is a Greek island in the Mediterranean Sea.</p>
+                        <h3>How</h3>
+                        <p>You can reach Chania airport from all over Europe.</p>
+                    </div>
+                </div>
+                <footer class="re-desk-25 re-table-100" >
+                    <div id="aside">
+                        <div >
+                            <ul >
+                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
+        </span>
+        {% if username %}
+        <span id="primary_nav">
+                <ul id="dmenu">
+                    <span id="dright">
+                        <li class="menu-item"><a href="/article/new">新发布</a></li>
+                    </span>
+                </ul>
+        </span>
+        <span id="nav_right">
+                <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/logou">退出</a></li>
+        </span>
+        {% else %}
+        <span id="nav_right">
+                <li ><a href="/user/register">注册 &emsp;</a></li>
+                <li ><a href="/user/login">登录</a></li>
+        </span>
+        {% endif %}
+    </div>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

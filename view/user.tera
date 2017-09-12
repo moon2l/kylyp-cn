@@ -57,7 +57,7 @@
                                 <span id="person-info">个人图像</span><span id="person-info">{{ username }}</span>
                                 <div id="person-info">
                                     <p>email:{{ login_user.email }}</p>
-                                    <p>注册时间:{{ login_user.regtime }}</p>
+                                    <p>注册时间:{{ login_user.created_at }}</p>
                                     <p>话题数，评论数</p>
                                 </div>
                             </div>
